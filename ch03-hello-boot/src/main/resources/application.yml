@@ -1,0 +1,24 @@
+# web server
+server:
+  port: 9081
+  servlet:
+    context-path: /hello/boot
+
+# spring auto configure
+spring:
+  application:
+    name: hello-boot
+
+
+# logging
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: INFO
+
+
+# open-feign
+mock-service:
+  url: http://localhost:9080/mock

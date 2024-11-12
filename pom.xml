@@ -12,6 +12,7 @@
         <module>ch00-commons</module>
         <module>ch01-infra</module>
         <module>ch02-hello</module>
+        <module>ch03-hello-boot</module>
     </modules>
 
     <properties>
