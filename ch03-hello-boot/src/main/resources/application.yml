@@ -17,8 +17,19 @@ logging:
     org:
       springframework:
         web: INFO
-
+    feign.Client: DEBUG
+    feign.Logger: DEBUG
+    feign.Request: DEBUG
+    feign.Response: DEBUG
+    com.example.learn.spring.boot.openfeign.hello: DEBUG
 
 # open-feign
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+
 mock-service:
   url: http://localhost:9080/mock
