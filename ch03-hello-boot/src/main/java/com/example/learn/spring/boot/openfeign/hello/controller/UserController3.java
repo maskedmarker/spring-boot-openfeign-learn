@@ -4,10 +4,7 @@ import com.example.learn.spring.boot.openfeign.hello.model.UserDto;
 import com.example.learn.spring.boot.openfeign.hello.service.UserService3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +27,12 @@ public class UserController3 {
         UserDto userDto = userService.getUser(userId);
 
         return userDto;
+    }
+
+    @PostMapping(value = "/addUser")
+    public UserDto addUser(@RequestBody UserDto userDto) {
+        UserDto returnDto = userService.addUser(userDto);
+
+        return returnDto;
     }
 }

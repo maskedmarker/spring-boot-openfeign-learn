@@ -1,20 +1,21 @@
 package com.example.learn.spring.boot.openfeign.mock.controller;
 
 import org.example.learn.spring.boot.openfeign.commons.model.dto.UserDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
 public class MockUserController {
 
-    @GetMapping("/getAllUsers")
-    public List<UserDto> getAllUsers() {
+    private List<UserDto> allUsers = new ArrayList<>();
+
+    @PostConstruct
+    private void setup() {
         List<UserDto> userDtoList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             UserDto userDto = new UserDto();
@@ -23,15 +24,26 @@ public class MockUserController {
             userDtoList.add(userDto);
         }
 
-        return userDtoList;
+        allUsers.addAll(userDtoList);
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<UserDto> getAllUsers() {
+        return allUsers;
     }
 
     @GetMapping("/getUser/{userId}")
     public UserDto getUser(@PathVariable("userId") String userId) {
-        UserDto userDto = new UserDto();
-        userDto.setUserId(userId);
-        userDto.setName("name" + userId);
+        Optional<UserDto> first = allUsers.stream()
+                .filter(userDto -> userDto.getUserId().equals(userId))
+                .findFirst();
 
+        return first.orElse(null);
+    }
+
+    @PostMapping("/addUser")
+    public UserDto addUser(@RequestBody UserDto userDto) {
+        allUsers.add(userDto);
         return userDto;
     }
 }

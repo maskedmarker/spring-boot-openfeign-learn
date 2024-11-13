@@ -22,4 +22,9 @@ public class UserService3 {
         UserDto user = mockUserServiceRemote.getUser(userId);
         return user;
     }
+
+    public UserDto addUser(UserDto userDto) {
+        UserDto user = mockUserServiceRemote.addUser(userDto);
+        return user;
+    }
 }
