@@ -25,7 +25,7 @@ feign:
   client:
     config:
       default:
-        loggerLevel: BASIC  #日志中http报文是否展示全部
+        loggerLevel: FULL  #日志中http报文是否展示全部
 
 mock-service:
   url: http://localhost:9080/mock
