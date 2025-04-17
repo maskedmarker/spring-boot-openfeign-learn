@@ -28,3 +28,20 @@ logger日志级别由logger-name对应的logger框架的日志级别配置决定
 ### feign框架的启动入口
 spring-cloud-openfeign-core中的spring.factories准备必须的基础对象
 EnableFeignClients的FeignClientsRegistrar向spring容器中注册feign-client对象
+
+## 疑问
+
+FeignClientsConfiguration为什么会被扫描到???
+
+org.springframework.cloud.openfeign.FeignAutoConfiguration.feignContext
+```
+@Bean
+public FeignContext feignContext() {
+    FeignContext context = new FeignContext();
+    context.setConfigurations(this.configurations);
+    return context;
+}
+```
+
+
+org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions
